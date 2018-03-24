@@ -12,7 +12,7 @@ and sends E-mail by `PHPMailer` library.
 [16.03.2013] v1.0
 * First version of script
 
-[05.03.2018] v1.1
+[24.03.2018] v1.1
 * Directory structure changed
 * Dependencies are downloaded by Composer
 * PHP Code improvement
