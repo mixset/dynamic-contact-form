@@ -58,7 +58,6 @@ label {
 .error {
     color: red;
     font: 12pt verdana;
-    padding-left: 50px;
 }
 
 .message-box {
