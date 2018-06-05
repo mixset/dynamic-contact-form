@@ -1,11 +1,10 @@
 <?php
 
-namespace Libs\ValidatorService;
+namespace ContactForm\Libs\ValidatorService;
 
-use Core\Helpers;
-
-require_once 'messages/Labels.php';
-require_once 'messages/Messages.php';
+use ContactForm\Core\Helpers;
+use ContactForm\Libs\ValidatorService\Messages\Labels;
+use ContactForm\Libs\ValidatorService\Messages\Messages;
 
 class ValidatorService
 {
@@ -32,7 +31,7 @@ class ValidatorService
             }
         }
 
-        $this->errors = Helpers::array_flatten($this->errors);
+        $this->errors = Helpers::arrayFlatten($this->errors);
 
         return $fields;
     }
@@ -51,12 +50,16 @@ class ValidatorService
             $validator = $this->getValidator($value);
             $className = $this->getClass($validator['class']);
 
-            if ($this->isSometimesOperator($validator['class']) === true) {;
+            if ($this->isSometimesOperator($validator['class']) === true) {
                 continue;
-        }
+            }
 
             if ($className->validate($field_value, $validator['argument']) === false) {
-                $errors[] = sprintf($this->messages[$validator['message_key']], $this->labels[$field_key], $validator['argument']);
+                $errors[] = sprintf(
+                    $this->messages[$validator['message_key']],
+                    $this->labels[$field_key],
+                    $validator['argument']
+                );
             }
         }
 
@@ -71,7 +74,7 @@ class ValidatorService
     private function getClass($validator)
     {
         $rule_parts = explode(':', $validator);
-        $className = '\\Libs\\ValidatorService\\Validators\\' . ucfirst($rule_parts[0]);
+        $className = 'ContactForm\\Libs\\ValidatorService\\Validators\\' . ucfirst($rule_parts[0]);
 
         if (class_exists($className)) {
             return new $className;

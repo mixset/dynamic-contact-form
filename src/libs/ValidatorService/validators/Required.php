@@ -1,8 +1,8 @@
 <?php
 
-namespace Libs\ValidatorService\Validators;
+namespace ContactForm\Libs\ValidatorService\Validators;
 
-use Libs\ValidatorService\ValidatorInterface;
+use ContactForm\Libs\ValidatorService\ValidatorInterface;
 
 class Required implements ValidatorInterface
 {

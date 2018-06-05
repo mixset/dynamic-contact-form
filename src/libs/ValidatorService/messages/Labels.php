@@ -1,6 +1,6 @@
 <?php
 
-namespace Libs\ValidatorService;
+namespace ContactForm\Libs\ValidatorService\Messages;
 
 class Labels
 {
