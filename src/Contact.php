@@ -1,17 +1,19 @@
 <?php
 
-namespace Core;
+namespace ContactForm;
 
-use Libs\ValidatorService\ValidatorService;
+use ContactForm\Libs\ValidatorService\ValidatorService;
 use PHPMailer;
 
 class Contact
 {
+    /**
+     * Validate user's input and send E-mail
+    */
     public function send()
     {
-        $post = $_POST;
         $validate = new ValidatorService();
-        $post = $validate->validate($post, [
+        $post = $validate->validate($_POST, [
             'firstname' => 'required|max_length:20',
             'lastname' => 'sometimes|max_length:20',
             'email' => 'required|email|max_length:50',
@@ -26,15 +28,18 @@ class Contact
         }
     }
 
+    /**
+     * @param array $post
+    */
     private function sendEmail(array $post)
     {
-        $body = 'Nowa wiadomość od' . $post['firstname'] . ' ' . $post['lastname'] . '<br>';
+        $body =  'Nowa wiadomość od' . $post['firstname'] . ' ' . $post['lastname'] . '<br>';
         $body .= 'Email Nadawcy: ' . $post['email'] . '<br>';
         $body .= 'Treść wiadomości: <br>' . $post['content'];
 
         $mail = new PHPMailer;
         $mail->IsSMTP();
-        $mail->Host = "smtp.example.com";
+        $mail->Host = 'smtp.example.com';
         // optional
         // used only when SMTP requires authentication
         $mail->SMTPAuth = true;
@@ -46,7 +51,7 @@ class Contact
         $mail->isHTML(true);
         $mail->Body = $body;
 
-        if(!$mail->send()) {
+        if (!$mail->send()) {
             error_log('Mailer error: ' . $mail->ErrorInfo);
         } else {
             unset($_SESSION['user_input']);
@@ -54,6 +59,9 @@ class Contact
         }
     }
 
+    /**
+     * @param $post
+    */
     private function saveUserInput($post)
     {
         foreach ($post as $key => $value) {

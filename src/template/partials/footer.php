@@ -1,7 +1,7 @@
     <script src="src/template/assets/js/jquery.js"></script>
     <script src="src/template/assets/js/validate.jquery.js"></script>
     <script>
-        $(function () {
+       /* $(function () {
             $(".contact-form").validate({
                 rules: {
                     firstname: {
@@ -35,7 +35,7 @@
                     }
                 }
             });
-        });
+        });*/
     </script>
 </body>
 </html>

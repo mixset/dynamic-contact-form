@@ -1,9 +1,11 @@
 <?php
 
+use ContactForm\Contact;
+
 require 'partials/header.php';
 
 if (isset($_POST['save'])) {
-    (new \Core\Contact())->send();
+    (new Contact())->send();
 }
 
 require 'partials/messages.php';
